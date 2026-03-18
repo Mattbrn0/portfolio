@@ -233,34 +233,38 @@ function App() {
                 </div>
               </article>
 
-              {/* <article className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-950/90 p-5 shadow-[0_22px_45px_rgba(15,23,42,0.9)] transition hover:border-sky-400/70 hover:shadow-[0_26px_60px_rgba(56,189,248,0.5)]">
+              <article className="group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-950/90 p-5 shadow-[0_22px_45px_rgba(15,23,42,0.9)] transition hover:border-sky-400/70 hover:shadow-[0_26px_60px_rgba(56,189,248,0.5)]">
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-2">
                     <h3 className="text-sm font-semibold text-slate-50 md:text-[15px]">
-                      Portfolio immersif 3D
+                      Générateur de mot de passe
                     </h3>
                     <p className="text-xs leading-relaxed text-slate-300">
-                      Expérience portfolio avec éléments 3D légers, survols
-                      interactifs et transitions en douceur entre les sections.
+                      Générateur de mot de passe aléatoire et sécurisé. Choix de la longueur et des caractères, avec possibilité de copier le mot de passe généré.
                     </p>
                   </div>
                   <span className="rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-medium text-sky-200 border border-sky-400/60">
-                    3D & motion
+                    #2
                   </span>
                 </div>
-
+                <a
+                  href="http://135.125.102.27:3010/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-fuchsia-300 hover:text-fuchsia-200 transition-colors"
+                >
+                  Accéder au générateur 
+                  <ArrowRight className="h-3 w-3" />
+                </a>
                 <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-300">
                   <span className="rounded-full bg-slate-900/80 px-2.5 py-1 border border-slate-700/70">
-                    React Three
+                    React
                   </span>
                   <span className="rounded-full bg-slate-900/80 px-2.5 py-1 border border-slate-700/70">
-                    WebGL
-                  </span>
-                  <span className="rounded-full bg-slate-900/80 px-2.5 py-1 border border-slate-700/70">
-                    Design système
+                    tailwindcss
                   </span>
                 </div>
-              </article> */}
+              </article>
             </div>
           </section>
 
@@ -278,7 +282,6 @@ function App() {
               </p>
               <p className="text-sm leading-relaxed text-slate-300 md:text-[15px]">
               J’apprécie particulièrement transformer une idée en produit fonctionnel : concevoir des interfaces claires, développer des fonctionnalités utiles et mettre en place des architectures solides côté backend.
-
               </p>
             </div>
 
