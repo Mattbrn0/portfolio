@@ -28,6 +28,7 @@ jobs:
         run: npm run build
 
   deploy:
+    environment: portfolio
     runs-on: ubuntu-latest
     needs: verify
     steps:
