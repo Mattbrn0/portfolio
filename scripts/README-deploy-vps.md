@@ -8,7 +8,8 @@ Dans `Settings > Secrets and variables > Actions > New repository secret`, crée
 - `VPS_HOST` : IP ou hostname du VPS (ex: `135.125.102.27`)
 - `VPS_USER` : utilisateur SSH sur le VPS (ex: `ubuntu`)
 - `VPS_PATH` : chemin vers le dossier du repo sur le VPS (ex: `/var/www/portfolio`)
-- `VPS_SSH_KEY` : clé privée SSH (contenu complet), qui doit être autorisée sur le VPS (dans `~/.ssh/authorized_keys`)
+- `VPS_PORT` : port SSH (ex: `22`) (optionnel)
+- `VPS_SSH_KEY_B64` : clé privée SSH encodée en base64 (recommandé)
 
 ## Clé SSH (à préparer une fois)
 Sur ta machine :
@@ -26,12 +27,12 @@ cat ~/.ssh/github-actions-vps.pub
 Sur le VPS, ajoute-la dans :
 `~/.ssh/authorized_keys`.
 
-Ensuite, dans GitHub, colle la clé privée :
+Ensuite, dans GitHub, colle la clé privée encodée en base64 :
 
 ```bash
-cat ~/.ssh/github-actions-vps
+base64 -i ~/.ssh/github-actions-vps
 ```
-Copie tout le contenu et colle-le dans `VPS_SSH_KEY`.
+Copie tout le contenu et colle-le dans `VPS_SSH_KEY_B64`.
 
 ## Première exécution sur le VPS
 Configurer Nginx une fois pour servir `dist/` (site statique).
