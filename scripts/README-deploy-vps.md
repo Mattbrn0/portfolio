@@ -1,4 +1,4 @@
-# Déploiement automatique (GitHub Actions -> VPS + PM2)
+# Déploiement automatique (GitHub Actions -> VPS + Nginx)
 
 Ce dépôt inclut la workflow GitHub `deploy-vps.yml`.
 
@@ -34,14 +34,30 @@ cat ~/.ssh/github-actions-vps
 Copie tout le contenu et colle-le dans `VPS_SSH_KEY`.
 
 ## Première exécution sur le VPS
-Une fois pour démarrer :
+Configurer Nginx une fois pour servir `dist/` (site statique).
 
 ```bash
-cd /var/www/portfolio
-pm2 start ecosystem.config.cjs
-pm2 save
+sudo nano /etc/nginx/sites-available/portfolio
+```
+
+À l’intérieur du bloc `server { ... }` (HTTPS), utilise :
+
+```nginx
+root /var/www/portfolio/dist;
+index index.html;
+
+location / {
+  try_files $uri $uri/ /index.html;
+}
+```
+
+Puis :
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
 ```
 
 Après ça, les `push` sur `main` déclencheront automatiquement :
-`verify (lint/build)` -> `deploy (ssh)` -> `npm ci` -> `npm run build` -> `pm2 restart`.
+`verify (lint/build)` -> `deploy (ssh)` -> `npm ci` -> `npm run build` -> `reload nginx`.
 
