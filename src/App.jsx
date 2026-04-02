@@ -211,7 +211,7 @@ function App() {
                 </div>
 
                 <a
-                  href="http://135.125.102.27:5173/"
+                  href="https://oryzons-converter.fr/"
                   target="_blank"
                   rel="noreferrer"
                   className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-fuchsia-300 hover:text-fuchsia-200 transition-colors"
@@ -237,23 +237,24 @@ function App() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-2">
                     <h3 className="text-sm font-semibold text-slate-50 md:text-[15px]">
-                      Générateur de mot de passe
+                      Oryzons – Agence web
                     </h3>
                     <p className="text-xs leading-relaxed text-slate-300">
-                      Générateur de mot de passe aléatoire et sécurisé. Choix de la longueur et des caractères, avec possibilité de copier le mot de passe généré.
+                      Site vitrine de mon agence de développement web : présentation
+                      des services, réalisations et prise de contact.
                     </p>
                   </div>
                   <span className="rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-medium text-sky-200 border border-sky-400/60">
-                    #2
+                    Agence
                   </span>
                 </div>
                 <a
-                  href="http://135.125.102.27:3010/"
+                  href="https://oryzons.com"
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-fuchsia-300 hover:text-fuchsia-200 transition-colors"
+                  className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-sky-300 hover:text-sky-200 transition-colors"
                 >
-                  Accéder au générateur 
+                  Voir le site
                   <ArrowRight className="h-3 w-3" />
                 </a>
                 <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-300">
@@ -261,7 +262,10 @@ function App() {
                     React
                   </span>
                   <span className="rounded-full bg-slate-900/80 px-2.5 py-1 border border-slate-700/70">
-                    tailwindcss
+                    Tailwind CSS
+                  </span>
+                  <span className="rounded-full bg-slate-900/80 px-2.5 py-1 border border-slate-700/70">
+                    Next.js
                   </span>
                 </div>
               </article>
