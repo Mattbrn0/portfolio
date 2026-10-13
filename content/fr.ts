@@ -1,0 +1,233 @@
+import type { Dictionary } from "./types";
+
+export const fr: Dictionary = {
+  meta: {
+    title: "Mathis Bricman — Développeur web",
+    description:
+      "Développeur web à Marseille. Sites, produits et outils, conçus et construits de bout en bout.",
+  },
+  nav: {
+    about: "À propos",
+    work: "Projets",
+    path: "Parcours",
+    contact: "Contact",
+    cta: "Démarrer un projet",
+    open: "Ouvrir le menu",
+    close: "Fermer le menu",
+    themeToDark: "Activer le thème sombre",
+    themeToLight: "Activer le thème clair",
+    lang: "English",
+    skip: "Aller au contenu",
+    palette: "Menu rapide",
+  },
+  hero: {
+    eyebrow: "Développeur web à Marseille",
+    title: "Des interfaces web nettes, rapides et vivantes.",
+    text: "Je conçois et développe des sites et des produits web pour des studios, des commerces et des équipes, du premier écran jusqu’à la mise en ligne.",
+    primary: "Démarrer un projet",
+    secondary: "Voir les projets",
+    available: "Disponible",
+    scene: "Le logo en volume : un anneau de trente lames qui s’assemble, puis s’ouvre comme un diaphragme au défilement.",
+    scroll: "Défiler pour ouvrir",
+    proofs: [
+      { k: "1 an", v: "en entreprise, sur un produit en ligne" },
+      { k: "A → Z", v: "du design au déploiement" },
+      { k: "24 h", v: "pour une première réponse" },
+    ],
+  },
+  about: {
+    index: "À propos",
+    title: "Je construis ce que les gens utilisent vraiment.",
+    paragraphs: [
+      "Diplômé d’une licence en développement web, j’ai passé une année en entreprise à faire évoluer des produits déjà en ligne : corrections, nouvelles fonctions, et cette attention aux détails qui ne se voit que lorsqu’elle manque.",
+      "Aujourd’hui je travaille en indépendant depuis Marseille. J’aime le moment où une idée devient un objet utilisable : une interface lisible, un parcours sans friction, une base assez solide pour encaisser la suite.",
+    ],
+    facts: [
+      { k: "Base", v: "Marseille" },
+      { k: "Mode", v: "Freelance" },
+      { k: "Langue", v: "Français, anglais" },
+    ],
+  },
+  widgets: {
+    clock: "Heure à Marseille",
+    open: "À l’atelier, réponse dans la journée",
+    closed: "Hors horaires, réponse demain matin",
+    location: "Basé à Marseille",
+    coords: "43,2965° N · 5,3698° E",
+    response: "Première réponse",
+    responseValue: "24 h",
+    responseText: "Une lecture de votre demande, pas un devis automatique.",
+    stack: "Stack",
+    stackHint: "Survolez un anneau pour le mettre en pause.",
+  },
+  projects: {
+    index: "Projets en ligne",
+    title: "Ce que j’ai construit et mis en production.",
+    text: "Un site d’agence, deux logiciels métier pour le nautisme, une plateforme de permis bateau et un outil comptable.",
+    view: "Étude de cas",
+    visit: "Voir le site",
+    pair: "Même socle, deux marques",
+    pairNote: "BoatFlow et Nautiloc sont le même logiciel de gestion, déployé avec l’identité de chaque loueur.",
+  },
+  cases: {
+    oryzons: {
+      title: "Oryzons",
+      client: "Agence web · Côte d’Azur",
+      summary:
+        "Le site de mon agence : sites vitrines, refontes, SEO et hébergement pour les indépendants et les PME de la région PACA.",
+      context:
+        "L’offre devait tenir en un écran : création, hébergement, maintenance et SEO, avec des tarifs affichés et une prise de contact rapide.",
+      role: "Direction artistique, design et développement, pages locales par ville (Nice, Marseille, Cannes…) et formulaire de demande qualifié.",
+      outcome:
+        "Un site typographique et sobre, des forfaits publics, et des demandes qui arrivent avec assez de contexte pour répondre sous 24 h.",
+    },
+    boatflow: {
+      title: "BoatFlow",
+      client: "Logiciel de gestion nautique",
+      summary: "Un seul espace pour les bases de location : réservations, planning, check-in et flotte.",
+      context:
+        "Les loueurs jonglaient entre tableurs, messages et carnets pour suivre les bateaux, les propriétaires et les skippers.",
+      role: "Conception et développement de l’application : espaces agence, propriétaires et skippers, planning des réservations, check-in et suivi de la flotte.",
+      outcome: "Une base qui pilote ses locations depuis un seul outil, au bureau comme sur le ponton.",
+    },
+    nautiloc: {
+      title: "Nautiloc",
+      client: "Marque blanche pour Bleu Calanque",
+      summary: "La plateforme BoatFlow, déployée sous la marque Nautiloc pour Bleu Calanque, agence de location de bateaux.",
+      context: "Bleu Calanque voulait le même outil, avec son nom, son logo et son domaine.",
+      role: "Socle multi-marque : identité, domaine et textes propres à chaque client sur une base de code commune.",
+      outcome: "Un nouveau client en ligne sans dupliquer le code, et chaque évolution profite aux deux marques.",
+    },
+    nautiflow: {
+      title: "Nautiflow",
+      client: "Plateforme pour écoles de navigation",
+      summary: "Le dossier de permis bateau en ligne : documents, suivi et échanges entre l’élève et son école.",
+      context:
+        "Les écoles collectaient pièces d’identité, certificats médicaux et photos par mail ou sur papier, puis relançaient à la main.",
+      role: "Parcours élève, espace école, dépôt et suivi des pièces, design de l’interface.",
+      outcome: "Un dossier que l’élève complète seul, et une école qui voit d’un coup d’œil ce qui manque.",
+    },
+    "oryzons-converter": {
+      title: "Oryzons Converter",
+      client: "Outil de comptabilité",
+      summary: "On glisse des factures PDF, on récupère un tableau Excel structuré.",
+      context: "La saisie des factures fournisseurs dans un tableur prenait des heures chaque mois.",
+      role: "Extraction des données (date, fournisseur, total TTC, échéance, mode et état du paiement, acomptes) et export Excel.",
+      outcome: "Des dizaines de factures traitées d’un coup, et un fichier prêt pour la comptabilité.",
+    },
+  },
+  skills: {
+    index: "Stack",
+    title: "Les outils que j’utilise vraiment.",
+    text: "Je choisis la pile en fonction du chantier. Le socle reste stable.",
+    groups: [
+      { title: "Interface", items: ["React", "TypeScript", "Next.js", "Tailwind CSS"] },
+      { title: "Données", items: ["Node.js", "PHP", "MySQL", "PostgreSQL"] },
+      { title: "Tenue", items: ["Accessibilité", "Performance", "Responsive", "SEO technique"] },
+    ],
+  },
+  journey: {
+    index: "Parcours",
+    title: "Du premier cours à la mise en ligne.",
+    text: "Le parcours est court et déjà en production. C’est voulu : je préfère montrer ce qui est en ligne.",
+    steps: [
+      {
+        period: "Formation",
+        title: "Licence développement web",
+        text: "Bases solides : interfaces, bases de données, et le réflexe de livrer quelque chose de complet.",
+      },
+      {
+        period: "Entreprise · 1 an",
+        title: "Produit déjà en ligne",
+        text: "Maintenance, nouvelles fonctions, et le rythme d’une équipe qui a des utilisateurs réels.",
+      },
+      {
+        period: "Aujourd’hui",
+        title: "Indépendant à Marseille",
+        text: "Sites, outils internes et refontes, du cadrage jusqu’à la mise en ligne.",
+      },
+    ],
+    servicesTitle: "Ce que je prends en charge",
+    services: [
+      {
+        title: "Produit web",
+        text: "Un site ou un outil, de la structure des pages jusqu’au déploiement.",
+      },
+      {
+        title: "Interface",
+        text: "Hiérarchie, composants, états vides, et un design system assez petit pour être tenu.",
+      },
+      {
+        title: "Refonte",
+        text: "Garder ce qui marche, remplacer ce qui ralentit, sans tout jeter par principe.",
+      },
+    ],
+  },
+  proof: {
+    index: "Clients",
+    title: "Pour qui je construis.",
+    note: "Un loueur de bateaux, et un logiciel à son nom.",
+    view: "Voir Nautiloc",
+    items: [
+      {
+        client: "Bleu Calanque",
+        activity: "Agence de location de bateaux",
+        project: "nautiloc",
+        text: "Bleu Calanque m’a confié la création de Nautiloc : son logiciel de gestion, à son nom, pour piloter réservations, planning, check-in et flotte.",
+      },
+    ],
+  },
+  contact: {
+    index: "Contact",
+    title: "Parlons de votre projet.",
+    text: "Quelques phrases suffisent : le contexte, le délai, et ce qui bloque aujourd’hui. Je réponds avec une première lecture, pas avec un devis automatique.",
+    name: "Nom",
+    email: "Email",
+    company: "Structure",
+    message: "Message",
+    submit: "Envoyer",
+    sending: "Envoi…",
+    success: "Message reçu. Je vous réponds rapidement.",
+    error: "L’envoi n’a pas abouti. Écrivez-moi directement :",
+    invalid: "Vérifiez les champs : un nom, un email valide, et un message d’au moins quelques lignes.",
+    copy: "Copier l’adresse",
+    copied: "Adresse copiée",
+  },
+  palette: {
+    placeholder: "Aller à une section, un projet, une action…",
+    empty: "Aucun résultat. Essayez « projets » ou « contact ».",
+    sections: "Sections",
+    projects: "Projets",
+    actions: "Actions",
+    theme: "Changer de thème",
+    language: "Passer en anglais",
+    copyEmail: "Copier l’adresse email",
+    copied: "Adresse copiée",
+    hint: "Ouvrir le menu rapide",
+  },
+  footer: {
+    note: "Sites et outils, depuis Marseille.",
+    rights: "Tous droits réservés.",
+    top: "Haut de page",
+    local: "Marseille",
+  },
+  caseStudy: {
+    back: "Tous les projets",
+    context: "Contexte",
+    role: "Rôle",
+    outcome: "Résultat",
+    stack: "Stack",
+    year: "Année",
+    next: "Chantier suivant",
+  },
+  notFound: {
+    title: "Cette page n’existe pas.",
+    text: "Le lien est peut-être ancien. Le travail, lui, est sur l’accueil.",
+    back: "Retour à l’accueil",
+  },
+  error: {
+    title: "La page n’a pas pu s’afficher.",
+    text: "Un incident technique a coupé le rendu. Vous pouvez réessayer.",
+    retry: "Réessayer",
+  },
+};
