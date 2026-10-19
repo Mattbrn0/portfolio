@@ -17,17 +17,17 @@ concurrency:
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     environment: portfolio
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -85,10 +85,10 @@ jobs:
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
 
-          rsync -az --mkpath --delete \
+          rsync -az --delete \
             --exclude '.env' \
             -e "ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
-            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/next-app/"
+            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/"
 
       - name: Write env and start
         env:
@@ -103,7 +103,7 @@ jobs:
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
           SSH="ssh -p ${VPS_PORT} -i ${HOME}/.ssh/id_ed25519 -o IdentitiesOnly=yes"
-          APP_REMOTE="${VPS_PATH}/next-app"
+          APP_REMOTE="${VPS_PATH}"
 
           umask 077
           {
