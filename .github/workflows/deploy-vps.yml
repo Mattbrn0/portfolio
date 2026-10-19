@@ -121,7 +121,7 @@ jobs:
           scp -P "${VPS_PORT}" -i "${HOME}/.ssh/id_ed25519" -o IdentitiesOnly=yes \
             /tmp/portfolio.env "${VPS_USER}@${VPS_HOST}:${APP_REMOTE}/.env"
           rm -f /tmp/portfolio.env
-          $SSH "${VPS_USER}@${VPS_HOST}" "bash '${APP_REMOTE}/remote-deploy.sh'"
+          $SSH "${VPS_USER}@${VPS_HOST}" "sed -i 's/\r$//' \$HOME/portfolio-next/remote-deploy.sh; bash \$HOME/portfolio-next/remote-deploy.sh"
 
       - name: Check live site
         run: |
