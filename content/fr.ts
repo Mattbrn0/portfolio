@@ -19,6 +19,7 @@ export const fr: Dictionary = {
     lang: "English",
     skip: "Aller au contenu",
     palette: "Menu rapide",
+    cv: "CV",
   },
   hero: {
     eyebrow: "Développeur web à Marseille",
@@ -204,6 +205,99 @@ export const fr: Dictionary = {
     copyEmail: "Copier l’adresse email",
     copied: "Adresse copiée",
     hint: "Ouvrir le menu rapide",
+    downloadCv: "Télécharger le CV (PDF)",
+  },
+  cv: {
+    metaTitle: "CV",
+    metaDescription: "CV de Mathis Bricman, développeur web — PDF téléchargeable.",
+    download: "Télécharger le PDF",
+    view: "Voir le CV",
+    back: "Retour au site",
+    role: "Développeur web",
+    profileTitle: "Profil",
+    profile:
+      "Licence développement web, un an en entreprise sur un produit déjà en ligne, puis des sites et des outils livrés en propre. Je construis en Next.js et TypeScript, du cadrage jusqu’à la mise en production.",
+    experienceTitle: "Expérience",
+    educationTitle: "Formation",
+    stackTitle: "Stack",
+    skillsTitle: "Savoir-être",
+    languagesTitle: "Langues",
+    projectsTitle: "Projets livrés",
+    toolkitTitle: "Compétences",
+    onPage: "Sur cette page",
+    pdfTitle: "La version papier.",
+    pdfText: "Une page A4, le même contenu, prête à imprimer ou à joindre à une candidature.",
+    license: "Permis B",
+    phone: "06 43 12 14 15",
+    email: "mbricman3@gmail.com",
+    address: "3 chemin de la Passide, 13950 Cadolive",
+    experience: [
+      {
+        period: "Avr. 2026 — Oct. 2026",
+        title: "Responsable d’agence",
+        org: "Bleu Calanque, location de bateaux",
+        bullets: [
+          "Organisation de l’équipe et outils numériques pour le planning des locations.",
+        ],
+      },
+      {
+        period: "Mars 2025 — Déc. 2025",
+        title: "Agent de quai",
+        org: "Amazon France",
+        bullets: [
+          "Tri et expédition des colis, délais, règles de sécurité, tenue des zones de travail.",
+        ],
+      },
+      {
+        period: "2024 — 2025",
+        title: "Développeur d’application",
+        org: "AM Digital Pro",
+        bullets: [
+          "Conception, développement et mise en ligne de solutions web et mobiles.",
+          "Suivi client, diagnostic et correction d’incidents, jusqu’à la livraison.",
+        ],
+      },
+      {
+        period: "Août 2023 — Avr. 2024",
+        title: "Employé de restauration",
+        org: "Flunch",
+        bullets: ["Service en salle, encaissement et travail d’équipe sur un rythme soutenu."],
+      },
+    ],
+    education: [
+      { period: "2024 — 2025", title: "Licence développement web", school: "My Digital School" },
+      {
+        period: "2022 — 2024",
+        title: "BTS SIO — Services informatiques aux organisations",
+        school: "Lycée privé Saint-Joseph",
+      },
+      { period: "2018 — 2021", title: "Bac STI2D", school: "Lycée Édouard Branly" },
+    ],
+    stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Node.js", "PHP", "MySQL", "PostgreSQL"],
+    skills: ["Autonomie", "Rigueur", "Organisation", "Esprit d’analyse", "Réactivité", "Travail d’équipe"],
+    languages: ["Français — langue maternelle", "Anglais — professionnel"],
+    selected: [
+      {
+        name: "Oryzons",
+        url: "https://oryzons.com",
+        text: "Site d’agence web : offre, tarifs, pages locales et prise de contact.",
+      },
+      {
+        name: "BoatFlow / Nautiloc",
+        url: "https://app.boatflow.fr",
+        text: "Logiciel de gestion de location nautique, décliné en marque blanche.",
+      },
+      {
+        name: "Nautiflow",
+        url: "https://nautiflow.fr",
+        text: "Dossier de permis bateau en ligne pour les écoles de navigation.",
+      },
+      {
+        name: "Oryzons Converter",
+        url: "https://oryzons-converter.fr",
+        text: "Extraction de factures PDF vers un tableau Excel structuré.",
+      },
+    ],
   },
   footer: {
     note: "Sites et outils, depuis Marseille.",

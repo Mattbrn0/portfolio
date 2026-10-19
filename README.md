@@ -27,6 +27,8 @@ Tout le texte éditable est dans `content/`, sans toucher aux composants.
 | `content/en.ts` | Tous les textes anglais |
 | `content/types.ts` | Contrat TypeScript entre les deux langues |
 
+Le CV en ligne est sur `/cv` (anglais : `/en/cv`). Le PDF se télécharge depuis cette page, ou via `/api/cv`. Les textes sont dans `cv` de `content/fr.ts` et `content/en.ts`.
+
 Les visuels de projets sont de vraies captures des sites (1440 × 900) dans `public/projects/`. Pour les refaire : `powershell -File scripts/capture-projects.ps1` (Chrome ou Edge requis). Pour ajouter un projet : une entrée dans `content/projects.ts`, son texte dans `cases` de `fr.ts` et `en.ts`, et une ligne dans le script de capture.
 
 ## Variables d’environnement

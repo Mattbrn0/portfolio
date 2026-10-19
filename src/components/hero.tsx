@@ -132,6 +132,9 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
                   <MagneticAnchor href={publicPath(locale, "/#projets")} variant="glass">
                     {dict.hero.secondary}
                   </MagneticAnchor>
+                  <MagneticAnchor href={publicPath(locale, "/cv")} variant="ghost">
+                    {dict.nav.cv}
+                  </MagneticAnchor>
                 </div>
               </motion.div>
 

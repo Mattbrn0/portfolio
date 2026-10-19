@@ -45,6 +45,7 @@ Géométrie dans `src/lib/logo.ts`, partagée par :
 - Thème : le nouveau thème s'ouvre en cercle depuis le bouton cliqué.
 - Titres de section révélés mot à mot, une seule fois. Bento qui apparaît en cascade.
 - Parcours : une ligne se trace au défilement et allume chaque étape.
+- CV (`/cv`) : nom révélé lettre par lettre, chiffres qui comptent, sommaire collant qui suit la lecture, frise d'expérience tracée au défilement, halo qui suit le pointeur sur le verre, aperçu A4 qui s'incline. Barre de progression en haut de page.
 - `prefers-reduced-motion` coupe les animations et remplace la scène 3D par le logo SVG.
 
 ## Widgets
@@ -54,3 +55,7 @@ Horloge de Marseille avec statut (heures ouvrées 9 h – 19 h, lundi – vendre
 ## Structure
 
 Hero, projets (pile de cinq cartes), atelier (bento de widgets), parcours, retours (carrousel à glisser si nécessaire), contact, footer. Le français est l'URL par défaut (`/`), l'anglais vit sous `/en`. Tout le texte éditable est dans `content/`.
+
+## CV PDF
+
+Généré par `@react-pdf/renderer` (`src/lib/cv-document.tsx`, servi par `/api/cv`). Une page A4, mêmes règles que le site : noir, blanc, gris, logo en tête. Bricolage Grotesque (instance figée opsz 96, wdth 92, 600) et Geist sont embarquées en TTF dans `src/assets/fonts/` (licence OFL) et incluses dans la trace de `/api/cv` via `outputFileTracingIncludes`.

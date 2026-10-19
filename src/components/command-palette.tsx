@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { profile, projects } from "@content/projects";
 import type { Dictionary } from "@content/types";
 import { useThemeSwitch } from "@/components/theme-switch";
-import { publicPath, swapLocale, type Locale } from "@/lib/locale";
+import { cvPdfHref, publicPath, swapLocale, type Locale } from "@/lib/locale";
 import { fluid } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -75,6 +75,12 @@ export function CommandPalette({ dict, locale }: { dict: Dictionary; locale: Loc
       { id: "about", group: dict.palette.sections, label: dict.nav.about, run: go("a-propos") },
       { id: "path", group: dict.palette.sections, label: dict.nav.path, run: go("parcours") },
       { id: "contact", group: dict.palette.sections, label: dict.nav.contact, run: go("contact") },
+      {
+        id: "cv-page",
+        group: dict.palette.sections,
+        label: dict.nav.cv,
+        run: () => router.push(publicPath(locale, "/cv")),
+      },
       ...projects.map((project) => ({
         id: project.slug,
         group: dict.palette.projects,
@@ -121,6 +127,14 @@ export function CommandPalette({ dict, locale }: { dict: Dictionary; locale: Loc
         group: dict.palette.actions,
         label: "LinkedIn",
         run: () => window.open(profile.linkedin, "_blank", "noopener"),
+      },
+      {
+        id: "cv",
+        group: dict.palette.actions,
+        label: dict.palette.downloadCv,
+        run: () => {
+          window.location.href = cvPdfHref(locale);
+        },
       },
     ];
   }, [dict, locale, pathname, router, toggle]);

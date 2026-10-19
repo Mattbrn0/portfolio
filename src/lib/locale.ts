@@ -23,3 +23,7 @@ export function swapLocale(pathname: string, next: Locale) {
   const path = bare.startsWith("/") ? bare : `/${bare}`;
   return publicPath(next, path);
 }
+
+export function cvPdfHref(locale: Locale) {
+  return `/api/cv?locale=${locale}`;
+}

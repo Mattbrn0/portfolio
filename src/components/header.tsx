@@ -184,6 +184,12 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
             </AnimatePresence>
           </button>
           <Link
+            href={publicPath(locale, "/cv")}
+            className="hidden h-10 items-center rounded-full px-3 text-sm font-medium text-muted transition-colors duration-300 hover:bg-ink/[0.07] hover:text-ink md:inline-flex"
+          >
+            {dict.nav.cv}
+          </Link>
+          <Link
             href={publicPath(locale, "/#contact")}
             className="ml-1 hidden h-10 items-center rounded-full bg-ink px-4 text-sm font-medium text-bg transition-transform duration-300 ease-fluid hover:scale-[1.04] active:scale-[0.97] md:inline-flex"
           >
@@ -247,16 +253,13 @@ export function Header({ dict, locale }: { dict: Dictionary; locale: Locale }) {
               </motion.div>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setOpen(false);
-                  openPalette();
-                }}
+              <Link
+                href={publicPath(locale, "/cv")}
+                onClick={() => setOpen(false)}
                 className="flex h-12 items-center justify-center rounded-2xl border border-line text-[15px] font-medium"
               >
-                {dict.nav.palette}
-              </button>
+                {dict.nav.cv}
+              </Link>
               <Link
                 href={publicPath(locale, "/#contact")}
                 onClick={() => setOpen(false)}

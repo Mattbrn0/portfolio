@@ -14,6 +14,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Polices embarquées dans le PDF du CV, lues depuis le disque par le route handler.
+  outputFileTracingIncludes: {
+    "/api/cv": ["./src/assets/fonts/**/*"],
+  },
   images: {
     formats: ["image/avif", "image/webp"],
   },

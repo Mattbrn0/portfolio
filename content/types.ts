@@ -24,6 +24,7 @@ export type Dictionary = {
     lang: string;
     skip: string;
     palette: string;
+    cv: string;
   };
   hero: {
     eyebrow: string;
@@ -120,6 +121,37 @@ export type Dictionary = {
     copyEmail: string;
     copied: string;
     hint: string;
+    downloadCv: string;
+  };
+  cv: {
+    metaTitle: string;
+    metaDescription: string;
+    download: string;
+    view: string;
+    back: string;
+    role: string;
+    profileTitle: string;
+    profile: string;
+    experienceTitle: string;
+    educationTitle: string;
+    stackTitle: string;
+    skillsTitle: string;
+    languagesTitle: string;
+    projectsTitle: string;
+    toolkitTitle: string;
+    onPage: string;
+    pdfTitle: string;
+    pdfText: string;
+    license: string;
+    phone: string;
+    email: string;
+    address: string;
+    experience: { period: string; title: string; org: string; bullets: string[] }[];
+    education: { period: string; title: string; school: string }[];
+    stack: string[];
+    skills: string[];
+    languages: string[];
+    selected: { name: string; url: string; text: string }[];
   };
   footer: { note: string; rights: string; top: string; local: string };
   caseStudy: {
