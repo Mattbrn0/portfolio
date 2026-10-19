@@ -82,22 +82,16 @@ jobs:
           set -euo pipefail
           VPS_HOST="${{ secrets.VPS_HOST }}"
           VPS_USER="${{ secrets.VPS_USER }}"
-          VPS_PATH="${{ secrets.VPS_PATH }}"
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
-          if [ -z "${VPS_PATH}" ] || [ "${VPS_PATH}" = "/" ]; then
-            echo "VPS_PATH invalide"
-            exit 1
-          fi
+          SSH="ssh -p ${VPS_PORT} -i ${HOME}/.ssh/id_ed25519 -o IdentitiesOnly=yes"
 
-          ssh -p "${VPS_PORT}" -i "${HOME}/.ssh/id_ed25519" -o IdentitiesOnly=yes \
-            "${VPS_USER}@${VPS_HOST}" \
-            "sudo chown -R ${VPS_USER}:${VPS_USER} '${VPS_PATH}' && sudo chmod -R u+rwX '${VPS_PATH}'"
+          $SSH "${VPS_USER}@${VPS_HOST}" "mkdir -p \$HOME/portfolio-next"
 
           rsync -az --delete \
             --exclude '.env' \
             -e "ssh -p ${VPS_PORT} -i ${HOME}/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
-            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/"
+            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:portfolio-next/"
 
       - name: Write env and start
         env:
@@ -108,11 +102,10 @@ jobs:
           set -euo pipefail
           VPS_HOST="${{ secrets.VPS_HOST }}"
           VPS_USER="${{ secrets.VPS_USER }}"
-          VPS_PATH="${{ secrets.VPS_PATH }}"
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
           SSH="ssh -p ${VPS_PORT} -i ${HOME}/.ssh/id_ed25519 -o IdentitiesOnly=yes"
-          APP_REMOTE="${VPS_PATH}"
+          APP_REMOTE="portfolio-next"
 
           umask 077
           {
