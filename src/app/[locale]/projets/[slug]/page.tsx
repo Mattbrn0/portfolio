@@ -143,6 +143,42 @@ export default async function ProjectPage({
             ))}
           </div>
 
+          {copy.steps || copy.fields ? (
+            <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] md:gap-4">
+              {copy.steps ? (
+                <section className="glass rounded-[32px] p-7 md:p-8">
+                  <h2 className="text-sm text-muted">{dict.caseStudy.steps}</h2>
+                  <ol className="mt-6 grid gap-6 sm:grid-cols-3 sm:gap-5">
+                    {copy.steps.map((step, i) => (
+                      <li key={step.title} className="border-t border-line pt-5">
+                        <span className="tabular text-sm text-muted">0{i + 1}</span>
+                        <p className="display mt-3 text-[clamp(1.6rem,2.4vw,2.1rem)]">
+                          {step.title}
+                        </p>
+                        <p className="mt-2 text-muted">{step.text}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
+              {copy.fields ? (
+                <section className="glass rounded-[32px] p-7 md:p-8">
+                  <h2 className="text-sm text-muted">{dict.caseStudy.fields}</h2>
+                  <ul className="mt-6 flex flex-wrap gap-1.5">
+                    {copy.fields.map((field) => (
+                      <li
+                        key={field}
+                        className="rounded-full bg-ink/[0.06] px-3.5 py-1.5 text-[15px]"
+                      >
+                        {field}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+            </div>
+          ) : null}
+
           <Link
             href={publicPath(locale, `/projets/${next.slug}`)}
             transitionTypes={["nav-forward"]}

@@ -110,10 +110,25 @@ export const en: Dictionary = {
     "oryzons-converter": {
       title: "Oryzons Converter",
       client: "Accounting tool",
-      summary: "Drop PDF invoices in, get a structured Excel sheet out.",
-      context: "Typing supplier invoices into a spreadsheet took hours every month.",
-      role: "Data extraction (date, supplier, total incl. VAT, due date, payment method and status, deposits) and Excel export.",
-      outcome: "Dozens of invoices processed at once, and a file ready for the accountant.",
+      summary: "Drop PDF invoices in, AI reads them, and you get an Excel sheet with one row per invoice.",
+      context: "Every month, supplier invoices were copied into a spreadsheet by hand: hours of typing and wrong amounts.",
+      role: "End-to-end design and development: a React drop zone, a Node.js server that reads the PDFs, AI analysis checked against a schema, then the Excel file.",
+      outcome: "Dozens of invoices converted in one go, and a file ready to hand to the accountant.",
+      steps: [
+        { title: "Upload", text: "Drop one or more PDF invoices onto the page." },
+        { title: "AI analysis", text: "The key details are extracted, then checked." },
+        { title: "Download", text: "A ready-to-use Excel sheet, one row per invoice." },
+      ],
+      fields: [
+        "Invoice date",
+        "Supplier",
+        "Total incl. VAT",
+        "Due date",
+        "Payment method",
+        "Status (paid / due)",
+        "Amount paid (deposits)",
+        "Payment date(s)",
+      ],
     },
   },
   skills: {
@@ -292,7 +307,7 @@ export const en: Dictionary = {
       {
         name: "Oryzons Converter",
         url: "https://oryzons-converter.fr",
-        text: "PDF invoices extracted into a structured Excel sheet.",
+        text: "PDF invoices read by AI and turned into a structured Excel sheet.",
       },
     ],
   },
@@ -310,6 +325,8 @@ export const en: Dictionary = {
     stack: "Stack",
     year: "Year",
     next: "Next case",
+    steps: "How it works",
+    fields: "Data extracted from each invoice",
   },
   notFound: {
     title: "This page does not exist.",

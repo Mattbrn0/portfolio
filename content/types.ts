@@ -7,6 +7,10 @@ export type ProjectCopy = {
   context: string;
   role: string;
   outcome: string;
+  /** Parcours d'utilisation, affiché en étapes numérotées sur l'étude de cas. */
+  steps?: { title: string; text: string }[];
+  /** Données produites par l'outil, affichées en pastilles sur l'étude de cas. */
+  fields?: string[];
 };
 
 export type Dictionary = {
@@ -162,6 +166,8 @@ export type Dictionary = {
     stack: string;
     year: string;
     next: string;
+    steps: string;
+    fields: string;
   };
   notFound: { title: string; text: string; back: string };
   error: { title: string; text: string; retry: string };

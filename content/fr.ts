@@ -111,10 +111,25 @@ export const fr: Dictionary = {
     "oryzons-converter": {
       title: "Oryzons Converter",
       client: "Outil de comptabilité",
-      summary: "On glisse des factures PDF, on récupère un tableau Excel structuré.",
-      context: "La saisie des factures fournisseurs dans un tableur prenait des heures chaque mois.",
-      role: "Extraction des données (date, fournisseur, total TTC, échéance, mode et état du paiement, acomptes) et export Excel.",
-      outcome: "Des dizaines de factures traitées d’un coup, et un fichier prêt pour la comptabilité.",
+      summary: "On glisse ses factures PDF, l’IA les lit, on récupère un tableau Excel avec une ligne par facture.",
+      context: "Chaque mois, les factures fournisseurs étaient recopiées à la main dans un tableur : des heures de saisie et des erreurs de montant.",
+      role: "Conception et développement de bout en bout : interface de dépôt en React, serveur Node.js qui lit les PDF, analyse par IA validée par schéma, puis génération du fichier Excel.",
+      outcome: "Des dizaines de factures converties en un seul envoi, et un fichier prêt à transmettre au comptable.",
+      steps: [
+        { title: "Importez", text: "On dépose une ou plusieurs factures PDF dans la page." },
+        { title: "Analyse IA", text: "Les informations clés sont extraites puis vérifiées." },
+        { title: "Téléchargez", text: "Un tableau Excel prêt à l’emploi, une ligne par facture." },
+      ],
+      fields: [
+        "Date de facture",
+        "Fournisseur",
+        "Total TTC",
+        "Date d’échéance",
+        "Mode de paiement",
+        "État (payée / à payer)",
+        "Montant payé (acomptes)",
+        "Date(s) de paiement",
+      ],
     },
   },
   skills: {
@@ -295,7 +310,7 @@ export const fr: Dictionary = {
       {
         name: "Oryzons Converter",
         url: "https://oryzons-converter.fr",
-        text: "Extraction de factures PDF vers un tableau Excel structuré.",
+        text: "Factures PDF lues par IA et converties en tableau Excel structuré.",
       },
     ],
   },
@@ -313,6 +328,8 @@ export const fr: Dictionary = {
     stack: "Stack",
     year: "Année",
     next: "Chantier suivant",
+    steps: "Comment ça marche",
+    fields: "Données extraites pour chaque facture",
   },
   notFound: {
     title: "Cette page n’existe pas.",

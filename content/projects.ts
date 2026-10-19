@@ -27,7 +27,7 @@ export const projects = [
     slug: "oryzons-converter",
     year: "2025",
     url: "https://oryzons-converter.fr/",
-    stack: ["Next.js", "Extraction PDF", "Export Excel"],
+    stack: ["React", "Node.js", "IA (LLM)", "ExcelJS"],
   },
 ] as const;
 
