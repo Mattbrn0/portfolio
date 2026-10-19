@@ -69,7 +69,7 @@ jobs:
           printf "%s" "${VPS_SSH_KEY_B64}" | base64 -d > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p "${VPS_PORT}" "${VPS_HOST}" >> ~/.ssh/known_hosts
-          ssh -p "${VPS_PORT}" -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes "${VPS_USER}@${VPS_HOST}" "echo ssh_ok"
+          ssh -p "${VPS_PORT}" -i "${HOME}/.ssh/id_ed25519" -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes "${VPS_USER}@${VPS_HOST}" "echo ssh_ok"
 
       - name: Rsync app to VPS
         run: |
@@ -79,12 +79,14 @@ jobs:
           VPS_PATH="${{ secrets.VPS_PATH }}"
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
-          SSH="ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
-          $SSH "${VPS_USER}@${VPS_HOST}" "mkdir -p '${VPS_PATH}/../next-app'"
+          KEY="${HOME}/.ssh/id_ed25519"
+          SSH="ssh -p ${VPS_PORT} -i ${KEY} -o IdentitiesOnly=yes"
+          APP_REMOTE="${VPS_PATH}/next-app"
+          $SSH "${VPS_USER}@${VPS_HOST}" "mkdir -p '${APP_REMOTE}'"
           rsync -az --delete \
             --exclude '.env' \
             -e "$SSH" \
-            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/../next-app/"
+            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${APP_REMOTE}/"
 
       - name: Write env and start
         env:
@@ -98,8 +100,8 @@ jobs:
           VPS_PATH="${{ secrets.VPS_PATH }}"
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
-          SSH="ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
-          APP_REMOTE="${VPS_PATH}/../next-app"
+          SSH="ssh -p ${VPS_PORT} -i ${HOME}/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+          APP_REMOTE="${VPS_PATH}/next-app"
 
           umask 077
           {
@@ -112,7 +114,7 @@ jobs:
             echo "CONTACT_TO_EMAIL=${CONTACT_TO_EMAIL}"
           } > /tmp/portfolio.env
 
-          scp -P "${VPS_PORT}" -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes \
+          scp -P "${VPS_PORT}" -i "${HOME}/.ssh/id_ed25519" -o IdentitiesOnly=yes \
             /tmp/portfolio.env "${VPS_USER}@${VPS_HOST}:${APP_REMOTE}/.env"
           rm -f /tmp/portfolio.env
           $SSH "${VPS_USER}@${VPS_HOST}" "bash '${APP_REMOTE}/remote-deploy.sh'"
