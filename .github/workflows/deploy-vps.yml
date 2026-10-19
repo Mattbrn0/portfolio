@@ -84,11 +84,11 @@ jobs:
           VPS_PATH="${{ secrets.VPS_PATH }}"
           VPS_PORT="${{ secrets.VPS_PORT }}"
           if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
-          KEY="${HOME}/.ssh/id_ed25519"
-          SSH=(ssh -p "${VPS_PORT}" -i "${KEY}" -o IdentitiesOnly=yes)
-          APP_REMOTE="${VPS_PATH%/}/next-app"
-          "${SSH[@]}" "${VPS_USER}@${VPS_HOST}" "mkdir -p '${APP_REMOTE}' && find '${APP_REMOTE}' -mindepth 1 ! -name .env -delete"
-          tar -C .deploy-pack -czf - . | "${SSH[@]}" "${VPS_USER}@${VPS_HOST}" "tar -C '${APP_REMOTE}' -xzf -"
+
+          rsync -az --mkpath --delete \
+            --exclude '.env' \
+            -e "ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes" \
+            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/next-app/"
 
       - name: Write env and start
         env:
