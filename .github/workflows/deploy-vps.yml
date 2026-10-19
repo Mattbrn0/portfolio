@@ -1,0 +1,124 @@
+name: Deploy VPS
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    branches: [main]
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: portfolio
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        env:
+          NEXT_PUBLIC_SITE_URL: https://bricman-mathis.fr
+        run: npm run build
+
+      - name: Pack standalone
+        run: |
+          set -euo pipefail
+          mkdir -p .deploy-pack/.next/static .deploy-pack/public
+          cp -a .next/standalone/. .deploy-pack/
+          cp -a .next/static/. .deploy-pack/.next/static/
+          cp -a public/. .deploy-pack/public/
+          cp ecosystem.config.cjs scripts/remote-deploy.sh .deploy-pack/
+          chmod +x .deploy-pack/remote-deploy.sh
+
+      - name: Setup SSH
+        run: |
+          set -euo pipefail
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER }}"
+          VPS_PATH="${{ secrets.VPS_PATH }}"
+          VPS_PORT="${{ secrets.VPS_PORT }}"
+          VPS_SSH_KEY_B64="${{ secrets.VPS_SSH_KEY_B64 }}"
+
+          if [ -z "${VPS_HOST}" ] || [ -z "${VPS_USER}" ] || [ -z "${VPS_PATH}" ] || [ -z "${VPS_SSH_KEY_B64}" ]; then
+            echo "Secrets manquants : VPS_HOST, VPS_USER, VPS_PATH, VPS_SSH_KEY_B64"
+            exit 1
+          fi
+          if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
+
+          mkdir -p ~/.ssh
+          printf "%s" "${VPS_SSH_KEY_B64}" | base64 -d > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "${VPS_PORT}" "${VPS_HOST}" >> ~/.ssh/known_hosts
+          ssh -p "${VPS_PORT}" -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes "${VPS_USER}@${VPS_HOST}" "echo ssh_ok"
+
+      - name: Rsync app to VPS
+        run: |
+          set -euo pipefail
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER }}"
+          VPS_PATH="${{ secrets.VPS_PATH }}"
+          VPS_PORT="${{ secrets.VPS_PORT }}"
+          if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
+          SSH="ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+          $SSH "${VPS_USER}@${VPS_HOST}" "mkdir -p '${VPS_PATH}/../next-app'"
+          rsync -az --delete \
+            --exclude '.env' \
+            -e "$SSH" \
+            .deploy-pack/ "${VPS_USER}@${VPS_HOST}:${VPS_PATH}/../next-app/"
+
+      - name: Write env and start
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          CONTACT_FROM_EMAIL: ${{ secrets.CONTACT_FROM_EMAIL }}
+          CONTACT_TO_EMAIL: ${{ secrets.CONTACT_TO_EMAIL }}
+        run: |
+          set -euo pipefail
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER }}"
+          VPS_PATH="${{ secrets.VPS_PATH }}"
+          VPS_PORT="${{ secrets.VPS_PORT }}"
+          if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
+          SSH="ssh -p ${VPS_PORT} -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes"
+          APP_REMOTE="${VPS_PATH}/../next-app"
+
+          umask 077
+          {
+            echo "NODE_ENV=production"
+            echo "PORT=3000"
+            echo "HOSTNAME=0.0.0.0"
+            echo "NEXT_PUBLIC_SITE_URL=https://bricman-mathis.fr"
+            echo "RESEND_API_KEY=${RESEND_API_KEY}"
+            echo "CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}"
+            echo "CONTACT_TO_EMAIL=${CONTACT_TO_EMAIL}"
+          } > /tmp/portfolio.env
+
+          scp -P "${VPS_PORT}" -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes \
+            /tmp/portfolio.env "${VPS_USER}@${VPS_HOST}:${APP_REMOTE}/.env"
+          rm -f /tmp/portfolio.env
+          $SSH "${VPS_USER}@${VPS_HOST}" "bash '${APP_REMOTE}/remote-deploy.sh'"
+
+      - name: Check live site
+        run: |
+          set -euo pipefail
+          curl -fsS -o /dev/null -w "%{http_code}\n" https://bricman-mathis.fr/
+          curl -fsS https://bricman-mathis.fr/ | grep -q "Des interfaces web nettes"

@@ -13,6 +13,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   poweredByHeader: false,
   // Polices embarquées dans le PDF du CV, lues depuis le disque par le route handler.
   outputFileTracingIncludes: {

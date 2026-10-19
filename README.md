@@ -46,15 +46,18 @@ Copier `.env.example` vers `.env.local`.
 
 Sans clé Resend, le formulaire répond une erreur et propose d’écrire à l’adresse du profil. Un champ caché sert de honeypot. Cinq envois maximum par adresse IP toutes les dix minutes.
 
-## Déploiement sur Vercel
+## Déploiement (GitHub Actions → VPS OVH)
 
-1. Pousser le dépôt sur GitHub.
-2. [vercel.com/new](https://vercel.com/new) → importer le dépôt. Framework : Next.js. Aucune commande de build à changer.
-3. Ajouter les variables de `.env.example` dans **Settings → Environment Variables**.
-4. Dans Resend, vérifier le domaine d’envoi et utiliser cette adresse dans `CONTACT_FROM_EMAIL`.
-5. Déployer, ouvrir `/`, `/en`, une page projet, et envoyer un message de test.
-6. Brancher le domaine (`bricman-mathis.fr`) et mettre à jour `NEXT_PUBLIC_SITE_URL`.
-7. Si Plausible est utilisé, créer le site avec le même domaine. Pas de bannière cookies : Plausible ne dépose pas de cookie.
+Un `push` sur `main` lance **CI** (lint + build), puis **Deploy VPS** si CI est vert.
+
+Le site n’est plus un export statique : Next.js tourne avec PM2 sur le VPS, nginx fait reverse proxy vers `127.0.0.1:3000`.
+
+Secrets (environnement GitHub `portfolio`) :
+
+- `VPS_HOST`, `VPS_USER`, `VPS_PATH`, `VPS_PORT`, `VPS_SSH_KEY_B64`
+- optionnel : `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, `CONTACT_TO_EMAIL` (formulaire)
+
+Ne pas modifier les MX OVH. L’ancien dossier `dist/` n’est plus servi une fois nginx basculé.
 
 ## Checklist de mise en production
 
