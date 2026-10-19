@@ -52,8 +52,8 @@ jobs:
           cp -a .next/standalone/. .deploy-pack/
           cp -a .next/static/. .deploy-pack/.next/static/
           cp -a public/. .deploy-pack/public/
-          cp ecosystem.config.cjs scripts/remote-deploy.sh .deploy-pack/
-          chmod +x .deploy-pack/remote-deploy.sh
+          cp ecosystem.config.cjs scripts/remote-deploy.sh scripts/enable-nginx-proxy.sh .deploy-pack/
+          chmod +x .deploy-pack/remote-deploy.sh .deploy-pack/enable-nginx-proxy.sh
           du -sh .deploy-pack
 
       - name: Setup SSH
@@ -123,8 +123,15 @@ jobs:
           rm -f /tmp/portfolio.env
           $SSH "${VPS_USER}@${VPS_HOST}" "sed -i 's/\r$//' \$HOME/portfolio-next/remote-deploy.sh; bash \$HOME/portfolio-next/remote-deploy.sh"
 
-      - name: Check live site
+      - name: Check app on VPS
         run: |
           set -euo pipefail
-          curl -fsS -o /dev/null -w "%{http_code}\n" https://bricman-mathis.fr/
-          curl -fsS https://bricman-mathis.fr/ | grep -q "Des interfaces web nettes"
+          VPS_HOST="${{ secrets.VPS_HOST }}"
+          VPS_USER="${{ secrets.VPS_USER }}"
+          VPS_PORT="${{ secrets.VPS_PORT }}"
+          if [ -z "${VPS_PORT}" ]; then VPS_PORT="22"; fi
+          ssh -p "${VPS_PORT}" -i "${HOME}/.ssh/id_ed25519" -o IdentitiesOnly=yes \
+            "${VPS_USER}@${VPS_HOST}" \
+            "curl -fsS http://127.0.0.1:3000/ | grep -q 'Des interfaces web nettes'"
+          echo "Next.js répond en local. Pour le domaine public, sur le VPS :"
+          echo "  sudo bash ~/portfolio-next/enable-nginx-proxy.sh"
